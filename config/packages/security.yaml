@@ -24,19 +24,19 @@ security:
                 # the property to query by - e.g. username, email, etc
                 property: 'username'
 
-        users_from_ldap:
-            ldap:
-                service: Symfony\Component\Ldap\Ldap
-                base_dn: 'DC=asv,DC=local'
-                search_dn: '%env(AD_SEARCHDN)%'
-                search_password: '%env(AD_SEARCHPWD)%'
-                default_roles: ["ROLE_USER"]
-                filter:  "(&(objectClass=user)(sAMAccountName={username}))"
-                uid_key: "sAMAccountName"
+        #users_from_ldap:
+        #    ldap:
+        #        service: Symfony\Component\Ldap\Ldap
+        #        base_dn: 'DC=asv,DC=local'
+        #        search_dn: '%env(AD_SEARCHDN)%'
+        #        search_password: '%env(AD_SEARCHPWD)%'
+        #        default_roles: ["ROLE_USER"]
+        #        filter:  "(&(objectClass=user)(sAMAccountName={username}))"
+        #        uid_key: "sAMAccountName"
 
         all_users:
             chain:
-                providers: [ 'users_in_memory', 'users_from_database', 'users_from_ldap' ]
+                providers: [ 'users_in_memory', 'users_from_database' ]
 
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
@@ -61,13 +61,13 @@ security:
                 username_path: username
                 password_path: password
 
-            json_login_ldap:
-                service: Symfony\Component\Ldap\Ldap
-                dn_string: '%env(AD_DNSTRING)%'
-                login_path: login
-                check_path: login
-                username_path: username
-                password_path: password
+            #json_login_ldap:
+            #    service: Symfony\Component\Ldap\Ldap
+            #    dn_string: '%env(AD_DNSTRING)%'
+            #    login_path: login
+            #    check_path: login
+            #    username_path: username
+            #    password_path: password
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
